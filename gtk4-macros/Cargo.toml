@@ -22,7 +22,7 @@ blueprint = []
 
 [dependencies]
 quick-xml = {version = "0.39", optional = true}
-proc-macro-crate = "3.3"
+proc-macro-crate = "3.5"
 proc-macro2 = { version = "1.0.100", features = ["span-locations"] }
 quote = "1.0"
 syn = {version = "2.0", features = ["full"]}
