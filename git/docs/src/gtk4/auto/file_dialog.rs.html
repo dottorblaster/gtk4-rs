@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `gtk4/src/auto/file_dialog.rs`."><title>file_dialog.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-17e0aaed.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="gtk4" data-themes="" data-resource-suffix="" data-rustdoc-version="1.96.0-nightly (a25435bcf 2026-03-29)" data-channel="nightly" data-search-js="search-63369b7b.js" data-stringdex-js="stringdex-2da4960a.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-5013f961.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-f7c3ffd8.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc src"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `gtk4/src/auto/file_dialog.rs`."><title>file_dialog.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ddecd707.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="gtk4" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.0-nightly (9f36de775 2026-07-19)" data-channel="nightly" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-41dd4d93.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files.js"></script><script defer src="../../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-f7c3ffd8.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc src"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]-->
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", checkDocsLatestStable);
 
@@ -75,11 +75,11 @@
 <a href=#2 id=2 data-nosnippet>2</a>// from gir-files (https://github.com/gtk-rs/gir-files)
 <a href=#3 id=3 data-nosnippet>3</a>// DO NOT EDIT
 <a href=#4 id=4 data-nosnippet>4</a>
-<a href=#5 id=5 data-nosnippet>5</a></span><span class="kw">use </span>crate::{<a href="file_filter.rs.html#14-100">FileFilter</a>, <a href="window.rs.html#21-781">Window</a>, <a href="../../../gtk4_sys/index.html">ffi</a>};
+<a href=#5 id=5 data-nosnippet>5</a></span><span class="kw">use crate</span>::{<a href="file_filter.rs.html#14-57">FileFilter</a>, <a href="window.rs.html#26-726">Window</a>, <a href="../../../gtk4_sys/index.html">ffi</a>};
 <a href=#6 id=6 data-nosnippet>6</a><span class="kw">use </span>glib::{
-<a href=#7 id=7 data-nosnippet>7</a>    prelude::<span class="kw-2">*</span>,
+<a href=#7 id=7 data-nosnippet>7</a>    <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/prelude/index.html">prelude</a>::<span class="kw-2">*</span>,
 <a href=#8 id=8 data-nosnippet>8</a>    signal::{<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/struct.SignalHandlerId.html">SignalHandlerId</a>, <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>},
-<a href=#9 id=9 data-nosnippet>9</a>    translate::<span class="kw-2">*</span>,
+<a href=#9 id=9 data-nosnippet>9</a>    <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/index.html">translate</a>::<span class="kw-2">*</span>,
 <a href=#10 id=10 data-nosnippet>10</a>};
 <a href=#11 id=11 data-nosnippet>11</a><span class="kw">use </span>std::{<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">boxed::Box</a> <span class="kw">as </span>Box_, <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">pin::Pin</a>};
 <a href=#12 id=12 data-nosnippet>12</a>
@@ -99,7 +99,7 @@
 <a href=#26 id=26 data-nosnippet>26</a>    /// #### `accept-label`
 <a href=#27 id=27 data-nosnippet>27</a>    ///  Label for the file chooser's accept button.
 <a href=#28 id=28 data-nosnippet>28</a>    ///
-<a href=#29 id=29 data-nosnippet>29</a>    /// Readable | Writeable
+<a href=#29 id=29 data-nosnippet>29</a>    /// Readable | Writable
 <a href=#30 id=30 data-nosnippet>30</a>    ///
 <a href=#31 id=31 data-nosnippet>31</a>    ///
 <a href=#32 id=32 data-nosnippet>32</a>    /// #### `default-filter`
@@ -114,7 +114,7 @@
 <a href=#41 id=41 data-nosnippet>41</a>    /// If [`filters`][struct@crate::FileDialog#filters] is not `NULL`, the default filter should be
 <a href=#42 id=42 data-nosnippet>42</a>    /// part of the list. If it is not, the dialog may choose to not make it available.
 <a href=#43 id=43 data-nosnippet>43</a>    ///
-<a href=#44 id=44 data-nosnippet>44</a>    /// Readable | Writeable
+<a href=#44 id=44 data-nosnippet>44</a>    /// Readable | Writable
 <a href=#45 id=45 data-nosnippet>45</a>    ///
 <a href=#46 id=46 data-nosnippet>46</a>    ///
 <a href=#47 id=47 data-nosnippet>47</a>    /// #### `filters`
@@ -123,7 +123,7 @@
 <a href=#50 id=50 data-nosnippet>50</a>    /// See [`default-filter`][struct@crate::FileDialog#default-filter] about how these
 <a href=#51 id=51 data-nosnippet>51</a>    /// two properties interact.
 <a href=#52 id=52 data-nosnippet>52</a>    ///
-<a href=#53 id=53 data-nosnippet>53</a>    /// Readable | Writeable
+<a href=#53 id=53 data-nosnippet>53</a>    /// Readable | Writable
 <a href=#54 id=54 data-nosnippet>54</a>    ///
 <a href=#55 id=55 data-nosnippet>55</a>    ///
 <a href=#56 id=56 data-nosnippet>56</a>    /// #### `initial-file`
@@ -134,7 +134,7 @@
 <a href=#61 id=61 data-nosnippet>61</a>    /// This is a utility property that sets both [`initial-folder`][struct@crate::FileDialog#initial-folder]
 <a href=#62 id=62 data-nosnippet>62</a>    /// and [`initial-name`][struct@crate::FileDialog#initial-name].
 <a href=#63 id=63 data-nosnippet>63</a>    ///
-<a href=#64 id=64 data-nosnippet>64</a>    /// Readable | Writeable
+<a href=#64 id=64 data-nosnippet>64</a>    /// Readable | Writable
 <a href=#65 id=65 data-nosnippet>65</a>    ///
 <a href=#66 id=66 data-nosnippet>66</a>    ///
 <a href=#67 id=67 data-nosnippet>67</a>    /// #### `initial-folder`
@@ -142,7 +142,7 @@
 <a href=#69 id=69 data-nosnippet>69</a>    ///
 <a href=#70 id=70 data-nosnippet>70</a>    /// This is the directory that is initially opened in the file chooser dialog.
 <a href=#71 id=71 data-nosnippet>71</a>    ///
-<a href=#72 id=72 data-nosnippet>72</a>    /// Readable | Writeable
+<a href=#72 id=72 data-nosnippet>72</a>    /// Readable | Writable
 <a href=#73 id=73 data-nosnippet>73</a>    ///
 <a href=#74 id=74 data-nosnippet>74</a>    ///
 <a href=#75 id=75 data-nosnippet>75</a>    /// #### `initial-name`
@@ -150,25 +150,25 @@
 <a href=#77 id=77 data-nosnippet>77</a>    ///
 <a href=#78 id=78 data-nosnippet>78</a>    /// This is the name of the file that is initially selected in the file chooser dialog.
 <a href=#79 id=79 data-nosnippet>79</a>    ///
-<a href=#80 id=80 data-nosnippet>80</a>    /// Readable | Writeable
+<a href=#80 id=80 data-nosnippet>80</a>    /// Readable | Writable
 <a href=#81 id=81 data-nosnippet>81</a>    ///
 <a href=#82 id=82 data-nosnippet>82</a>    ///
 <a href=#83 id=83 data-nosnippet>83</a>    /// #### `modal`
 <a href=#84 id=84 data-nosnippet>84</a>    ///  Whether the file chooser dialog is modal.
 <a href=#85 id=85 data-nosnippet>85</a>    ///
-<a href=#86 id=86 data-nosnippet>86</a>    /// Readable | Writeable
+<a href=#86 id=86 data-nosnippet>86</a>    /// Readable | Writable
 <a href=#87 id=87 data-nosnippet>87</a>    ///
 <a href=#88 id=88 data-nosnippet>88</a>    ///
 <a href=#89 id=89 data-nosnippet>89</a>    /// #### `title`
 <a href=#90 id=90 data-nosnippet>90</a>    ///  A title that may be shown on the file chooser dialog.
 <a href=#91 id=91 data-nosnippet>91</a>    ///
-<a href=#92 id=92 data-nosnippet>92</a>    /// Readable | Writeable
+<a href=#92 id=92 data-nosnippet>92</a>    /// Readable | Writable
 <a href=#93 id=93 data-nosnippet>93</a>    ///
 <a href=#94 id=94 data-nosnippet>94</a>    /// # Implements
 <a href=#95 id=95 data-nosnippet>95</a>    ///
 <a href=#96 id=96 data-nosnippet>96</a>    /// [`trait@glib::ObjectExt`]
 <a href=#97 id=97 data-nosnippet>97</a>    </span><span class="attr">#[doc(alias = <span class="string">"GtkFileDialog"</span>)]
-<a href=#98 id=98 data-nosnippet>98</a>    </span><span class="kw">pub struct </span><a href="#13-103">FileDialog</a>(Object&lt;ffi::<a href="../../../gtk4_sys/struct.GtkFileDialog.html">GtkFileDialog</a>, ffi::<a href="../../../gtk4_sys/struct.GtkFileDialogClass.html">GtkFileDialogClass</a>&gt;);
+<a href=#98 id=98 data-nosnippet>98</a>    </span><span class="kw">pub struct </span><a href="../../../gtk4/struct.FileDialog.html">FileDialog</a>(Object&lt;ffi::<a href="../../../gtk4_sys/struct.GtkFileDialog.html">GtkFileDialog</a>, ffi::<a href="../../../gtk4_sys/struct.GtkFileDialogClass.html">GtkFileDialogClass</a>&gt;);
 <a href=#99 id=99 data-nosnippet>99</a>
 <a href=#100 id=100 data-nosnippet>100</a>    <span class="kw">match fn </span>{
 <a href=#101 id=101 data-nosnippet>101</a>        type_ =&gt; || ffi::gtk_file_dialog_get_type(),
@@ -216,7 +216,7 @@
 <a href=#143 id=143 data-nosnippet>143</a>    </span><span class="attr">#[doc(alias = <span class="string">"gtk_file_dialog_get_default_filter"</span>)]
 <a href=#144 id=144 data-nosnippet>144</a>    #[doc(alias = <span class="string">"get_default_filter"</span>)]
 <a href=#145 id=145 data-nosnippet>145</a>    #[doc(alias = <span class="string">"default-filter"</span>)]
-<a href=#146 id=146 data-nosnippet>146</a>    </span><span class="kw">pub fn </span>default_filter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<a href="file_filter.rs.html#14-100">FileFilter</a>&gt; {
+<a href=#146 id=146 data-nosnippet>146</a>    </span><span class="kw">pub fn </span>default_filter(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<a href="file_filter.rs.html#14-57">FileFilter</a>&gt; {
 <a href=#147 id=147 data-nosnippet>147</a>        <span class="kw">unsafe </span>{
 <a href=#148 id=148 data-nosnippet>148</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_none.html">from_glib_none</a>(ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_get_default_filter.html">gtk_file_dialog_get_default_filter</a>(
 <a href=#149 id=149 data-nosnippet>149</a>                <a class="self" href="#146">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -318,14 +318,14 @@
 <a href=#245 id=245 data-nosnippet>245</a>    </span><span class="attr">#[doc(alias = <span class="string">"gtk_file_dialog_open"</span>)]
 <a href=#246 id=246 data-nosnippet>246</a>    </span><span class="kw">pub fn </span>open&lt;P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>&gt;(
 <a href=#247 id=247 data-nosnippet>247</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#248 id=248 data-nosnippet>248</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#248 id=248 data-nosnippet>248</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#249 id=249 data-nosnippet>249</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#250 id=250 data-nosnippet>250</a>        callback: P,
 <a href=#251 id=251 data-nosnippet>251</a>    ) {
 <a href=#252 id=252 data-nosnippet>252</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#253 id=253 data-nosnippet>253</a>        <span class="kw">let </span>is_main_context_owner = <a href="#252">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#254 id=254 data-nosnippet>254</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#253">is_main_context_owner</a>)
-<a href=#255 id=255 data-nosnippet>255</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#252">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#255 id=255 data-nosnippet>255</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#252">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#256 id=256 data-nosnippet>256</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#257 id=257 data-nosnippet>257</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#258 id=258 data-nosnippet>258</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -345,7 +345,7 @@
 <a href=#272 id=272 data-nosnippet>272</a>                <span class="kw">let </span><span class="kw-2">mut </span>error = std::ptr::<a href="https://doc.rust-lang.org/nightly/core/ptr/fn.null_mut.html">null_mut</a>();
 <a href=#273 id=273 data-nosnippet>273</a>                <span class="kw">let </span>ret =
 <a href=#274 id=274 data-nosnippet>274</a>                    ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_open_finish.html">gtk_file_dialog_open_finish</a>(<a href="#267">_source_object</a> <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>, <a href="#268">res</a>, <span class="kw-2">&amp;mut </span><a href="#272">error</a>);
-<a href=#275 id=275 data-nosnippet>275</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#272">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#275 id=275 data-nosnippet>275</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#272">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#276 id=276 data-nosnippet>276</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#273">ret</a>))
 <a href=#277 id=277 data-nosnippet>277</a>                } <span class="kw">else </span>{
 <a href=#278 id=278 data-nosnippet>278</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Err">Err</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#272">error</a>))
@@ -356,7 +356,7 @@
 <a href=#283 id=283 data-nosnippet>283</a>                <a href="#282">callback</a>(<a href="#275">result</a>);
 <a href=#284 id=284 data-nosnippet>284</a>            }
 <a href=#285 id=285 data-nosnippet>285</a>        }
-<a href=#286 id=286 data-nosnippet>286</a>        <span class="kw">let </span>callback = open_trampoline::&lt;P&gt;;
+<a href=#286 id=286 data-nosnippet>286</a>        <span class="kw">let </span>callback = <a href="#264-285">open_trampoline</a>::&lt;P&gt;;
 <a href=#287 id=287 data-nosnippet>287</a>        <span class="kw">unsafe </span>{
 <a href=#288 id=288 data-nosnippet>288</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_open.html">gtk_file_dialog_open</a>(
 <a href=#289 id=289 data-nosnippet>289</a>                <a class="self" href="#247">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -370,7 +370,7 @@
 <a href=#297 id=297 data-nosnippet>297</a>
 <a href=#298 id=298 data-nosnippet>298</a>    <span class="kw">pub fn </span>open_future(
 <a href=#299 id=299 data-nosnippet>299</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#300 id=300 data-nosnippet>300</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#300 id=300 data-nosnippet>300</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#301 id=301 data-nosnippet>301</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;<span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;Output = <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;&gt; + <span class="lifetime">'static</span>&gt;&gt; {
 <a href=#302 id=302 data-nosnippet>302</a>        <span class="kw">let </span>parent = <a href="#300">parent</a>.<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.map">map</a>(ToOwned::<a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#tymethod.to_owned">to_owned</a>);
 <a href=#303 id=303 data-nosnippet>303</a>        <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.pin">pin</a>(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/gio_future/struct.GioFuture.html">GioFuture</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/gio_future/struct.GioFuture.html#method.new">new</a>(<a class="self" href="#299">self</a>, <span class="kw">move </span>|obj, cancellable, send| {
@@ -402,14 +402,14 @@
 <a href=#329 id=329 data-nosnippet>329</a>    </span><span class="attr">#[doc(alias = <span class="string">"gtk_file_dialog_open_multiple"</span>)]
 <a href=#330 id=330 data-nosnippet>330</a>    </span><span class="kw">pub fn </span>open_multiple&lt;P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/list_model/struct.ListModel.html">ListModel</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>&gt;(
 <a href=#331 id=331 data-nosnippet>331</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#332 id=332 data-nosnippet>332</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#332 id=332 data-nosnippet>332</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#333 id=333 data-nosnippet>333</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#334 id=334 data-nosnippet>334</a>        callback: P,
 <a href=#335 id=335 data-nosnippet>335</a>    ) {
 <a href=#336 id=336 data-nosnippet>336</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#337 id=337 data-nosnippet>337</a>        <span class="kw">let </span>is_main_context_owner = <a href="#336">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#338 id=338 data-nosnippet>338</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#337">is_main_context_owner</a>)
-<a href=#339 id=339 data-nosnippet>339</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#336">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#339 id=339 data-nosnippet>339</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#336">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#340 id=340 data-nosnippet>340</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#341 id=341 data-nosnippet>341</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#342 id=342 data-nosnippet>342</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -432,7 +432,7 @@
 <a href=#359 id=359 data-nosnippet>359</a>                    <a href="#352">res</a>,
 <a href=#360 id=360 data-nosnippet>360</a>                    <span class="kw-2">&amp;mut </span><a href="#356">error</a>,
 <a href=#361 id=361 data-nosnippet>361</a>                );
-<a href=#362 id=362 data-nosnippet>362</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#356">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#362 id=362 data-nosnippet>362</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#356">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#363 id=363 data-nosnippet>363</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#357">ret</a>))
 <a href=#364 id=364 data-nosnippet>364</a>                } <span class="kw">else </span>{
 <a href=#365 id=365 data-nosnippet>365</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Err">Err</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#356">error</a>))
@@ -443,7 +443,7 @@
 <a href=#370 id=370 data-nosnippet>370</a>                <a href="#369">callback</a>(<a href="#362">result</a>);
 <a href=#371 id=371 data-nosnippet>371</a>            }
 <a href=#372 id=372 data-nosnippet>372</a>        }
-<a href=#373 id=373 data-nosnippet>373</a>        <span class="kw">let </span>callback = open_multiple_trampoline::&lt;P&gt;;
+<a href=#373 id=373 data-nosnippet>373</a>        <span class="kw">let </span>callback = <a href="#348-372">open_multiple_trampoline</a>::&lt;P&gt;;
 <a href=#374 id=374 data-nosnippet>374</a>        <span class="kw">unsafe </span>{
 <a href=#375 id=375 data-nosnippet>375</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_open_multiple.html">gtk_file_dialog_open_multiple</a>(
 <a href=#376 id=376 data-nosnippet>376</a>                <a class="self" href="#331">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -457,7 +457,7 @@
 <a href=#384 id=384 data-nosnippet>384</a>
 <a href=#385 id=385 data-nosnippet>385</a>    <span class="kw">pub fn </span>open_multiple_future(
 <a href=#386 id=386 data-nosnippet>386</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#387 id=387 data-nosnippet>387</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#387 id=387 data-nosnippet>387</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#388 id=388 data-nosnippet>388</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;<span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;Output = <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/list_model/struct.ListModel.html">ListModel</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;&gt; + <span class="lifetime">'static</span>&gt;&gt;
 <a href=#389 id=389 data-nosnippet>389</a>    {
 <a href=#390 id=390 data-nosnippet>390</a>        <span class="kw">let </span>parent = <a href="#387">parent</a>.<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.map">map</a>(ToOwned::<a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#tymethod.to_owned">to_owned</a>);
@@ -497,14 +497,14 @@
 <a href=#424 id=424 data-nosnippet>424</a>        P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/list_model/struct.ListModel.html">ListModel</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/gstring/struct.GString.html">GString</a>), glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>,
 <a href=#425 id=425 data-nosnippet>425</a>    &gt;(
 <a href=#426 id=426 data-nosnippet>426</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#427 id=427 data-nosnippet>427</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#427 id=427 data-nosnippet>427</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#428 id=428 data-nosnippet>428</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#429 id=429 data-nosnippet>429</a>        callback: P,
 <a href=#430 id=430 data-nosnippet>430</a>    ) {
 <a href=#431 id=431 data-nosnippet>431</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#432 id=432 data-nosnippet>432</a>        <span class="kw">let </span>is_main_context_owner = <a href="#431">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#433 id=433 data-nosnippet>433</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#432">is_main_context_owner</a>)
-<a href=#434 id=434 data-nosnippet>434</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#431">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#434 id=434 data-nosnippet>434</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#431">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#435 id=435 data-nosnippet>435</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#436 id=436 data-nosnippet>436</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#437 id=437 data-nosnippet>437</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -529,7 +529,7 @@
 <a href=#456 id=456 data-nosnippet>456</a>                    <span class="kw-2">&amp;mut </span><a href="#452">encoding</a>,
 <a href=#457 id=457 data-nosnippet>457</a>                    <span class="kw-2">&amp;mut </span><a href="#451">error</a>,
 <a href=#458 id=458 data-nosnippet>458</a>                );
-<a href=#459 id=459 data-nosnippet>459</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#451">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#459 id=459 data-nosnippet>459</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#451">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#460 id=460 data-nosnippet>460</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>((<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#453">ret</a>), <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_none.html">from_glib_none</a>(<a href="#452">encoding</a>)))
 <a href=#461 id=461 data-nosnippet>461</a>                } <span class="kw">else </span>{
 <a href=#462 id=462 data-nosnippet>462</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Err">Err</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#451">error</a>))
@@ -540,7 +540,7 @@
 <a href=#467 id=467 data-nosnippet>467</a>                <a href="#466">callback</a>(<a href="#459">result</a>);
 <a href=#468 id=468 data-nosnippet>468</a>            }
 <a href=#469 id=469 data-nosnippet>469</a>        }
-<a href=#470 id=470 data-nosnippet>470</a>        <span class="kw">let </span>callback = open_multiple_text_files_trampoline::&lt;P&gt;;
+<a href=#470 id=470 data-nosnippet>470</a>        <span class="kw">let </span>callback = <a href="#443-469">open_multiple_text_files_trampoline</a>::&lt;P&gt;;
 <a href=#471 id=471 data-nosnippet>471</a>        <span class="kw">unsafe </span>{
 <a href=#472 id=472 data-nosnippet>472</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_open_multiple_text_files.html">gtk_file_dialog_open_multiple_text_files</a>(
 <a href=#473 id=473 data-nosnippet>473</a>                <a class="self" href="#426">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -556,7 +556,7 @@
 <a href=#483 id=483 data-nosnippet>483</a>    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">"v4_18"</span>)))]
 <a href=#484 id=484 data-nosnippet>484</a>    </span><span class="kw">pub fn </span>open_multiple_text_files_future(
 <a href=#485 id=485 data-nosnippet>485</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#486 id=486 data-nosnippet>486</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#486 id=486 data-nosnippet>486</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#487 id=487 data-nosnippet>487</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;
 <a href=#488 id=488 data-nosnippet>488</a>        <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;
 <a href=#489 id=489 data-nosnippet>489</a>            <span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;Output = <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/list_model/struct.ListModel.html">ListModel</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/gstring/struct.GString.html">GString</a>), glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;&gt;
@@ -594,14 +594,14 @@
 <a href=#521 id=521 data-nosnippet>521</a>    #[doc(alias = <span class="string">"gtk_file_dialog_open_text_file"</span>)]
 <a href=#522 id=522 data-nosnippet>522</a>    </span><span class="kw">pub fn </span>open_text_file&lt;P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/gstring/struct.GString.html">GString</a>), glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>&gt;(
 <a href=#523 id=523 data-nosnippet>523</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#524 id=524 data-nosnippet>524</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#524 id=524 data-nosnippet>524</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#525 id=525 data-nosnippet>525</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#526 id=526 data-nosnippet>526</a>        callback: P,
 <a href=#527 id=527 data-nosnippet>527</a>    ) {
 <a href=#528 id=528 data-nosnippet>528</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#529 id=529 data-nosnippet>529</a>        <span class="kw">let </span>is_main_context_owner = <a href="#528">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#530 id=530 data-nosnippet>530</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#529">is_main_context_owner</a>)
-<a href=#531 id=531 data-nosnippet>531</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#528">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#531 id=531 data-nosnippet>531</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#528">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#532 id=532 data-nosnippet>532</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#533 id=533 data-nosnippet>533</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#534 id=534 data-nosnippet>534</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -626,7 +626,7 @@
 <a href=#553 id=553 data-nosnippet>553</a>                    <span class="kw-2">&amp;mut </span><a href="#549">encoding</a>,
 <a href=#554 id=554 data-nosnippet>554</a>                    <span class="kw-2">&amp;mut </span><a href="#548">error</a>,
 <a href=#555 id=555 data-nosnippet>555</a>                );
-<a href=#556 id=556 data-nosnippet>556</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#548">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#556 id=556 data-nosnippet>556</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#548">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#557 id=557 data-nosnippet>557</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>((<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#550">ret</a>), <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_none.html">from_glib_none</a>(<a href="#549">encoding</a>)))
 <a href=#558 id=558 data-nosnippet>558</a>                } <span class="kw">else </span>{
 <a href=#559 id=559 data-nosnippet>559</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Err">Err</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#548">error</a>))
@@ -637,7 +637,7 @@
 <a href=#564 id=564 data-nosnippet>564</a>                <a href="#563">callback</a>(<a href="#556">result</a>);
 <a href=#565 id=565 data-nosnippet>565</a>            }
 <a href=#566 id=566 data-nosnippet>566</a>        }
-<a href=#567 id=567 data-nosnippet>567</a>        <span class="kw">let </span>callback = open_text_file_trampoline::&lt;P&gt;;
+<a href=#567 id=567 data-nosnippet>567</a>        <span class="kw">let </span>callback = <a href="#540-566">open_text_file_trampoline</a>::&lt;P&gt;;
 <a href=#568 id=568 data-nosnippet>568</a>        <span class="kw">unsafe </span>{
 <a href=#569 id=569 data-nosnippet>569</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_open_text_file.html">gtk_file_dialog_open_text_file</a>(
 <a href=#570 id=570 data-nosnippet>570</a>                <a class="self" href="#523">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -653,7 +653,7 @@
 <a href=#580 id=580 data-nosnippet>580</a>    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">"v4_18"</span>)))]
 <a href=#581 id=581 data-nosnippet>581</a>    </span><span class="kw">pub fn </span>open_text_file_future(
 <a href=#582 id=582 data-nosnippet>582</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#583 id=583 data-nosnippet>583</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#583 id=583 data-nosnippet>583</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#584 id=584 data-nosnippet>584</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;
 <a href=#585 id=585 data-nosnippet>585</a>        <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;
 <a href=#586 id=586 data-nosnippet>586</a>            <span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;Output = <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/gstring/struct.GString.html">GString</a>), glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;&gt;
@@ -687,14 +687,14 @@
 <a href=#614 id=614 data-nosnippet>614</a>    </span><span class="attr">#[doc(alias = <span class="string">"gtk_file_dialog_save"</span>)]
 <a href=#615 id=615 data-nosnippet>615</a>    </span><span class="kw">pub fn </span>save&lt;P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>&gt;(
 <a href=#616 id=616 data-nosnippet>616</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#617 id=617 data-nosnippet>617</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#617 id=617 data-nosnippet>617</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#618 id=618 data-nosnippet>618</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#619 id=619 data-nosnippet>619</a>        callback: P,
 <a href=#620 id=620 data-nosnippet>620</a>    ) {
 <a href=#621 id=621 data-nosnippet>621</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#622 id=622 data-nosnippet>622</a>        <span class="kw">let </span>is_main_context_owner = <a href="#621">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#623 id=623 data-nosnippet>623</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#622">is_main_context_owner</a>)
-<a href=#624 id=624 data-nosnippet>624</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#621">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#624 id=624 data-nosnippet>624</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#621">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#625 id=625 data-nosnippet>625</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#626 id=626 data-nosnippet>626</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#627 id=627 data-nosnippet>627</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -714,7 +714,7 @@
 <a href=#641 id=641 data-nosnippet>641</a>                <span class="kw">let </span><span class="kw-2">mut </span>error = std::ptr::<a href="https://doc.rust-lang.org/nightly/core/ptr/fn.null_mut.html">null_mut</a>();
 <a href=#642 id=642 data-nosnippet>642</a>                <span class="kw">let </span>ret =
 <a href=#643 id=643 data-nosnippet>643</a>                    ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_save_finish.html">gtk_file_dialog_save_finish</a>(<a href="#636">_source_object</a> <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>, <a href="#637">res</a>, <span class="kw-2">&amp;mut </span><a href="#641">error</a>);
-<a href=#644 id=644 data-nosnippet>644</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#641">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#644 id=644 data-nosnippet>644</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#641">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#645 id=645 data-nosnippet>645</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#642">ret</a>))
 <a href=#646 id=646 data-nosnippet>646</a>                } <span class="kw">else </span>{
 <a href=#647 id=647 data-nosnippet>647</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Err">Err</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#641">error</a>))
@@ -725,7 +725,7 @@
 <a href=#652 id=652 data-nosnippet>652</a>                <a href="#651">callback</a>(<a href="#644">result</a>);
 <a href=#653 id=653 data-nosnippet>653</a>            }
 <a href=#654 id=654 data-nosnippet>654</a>        }
-<a href=#655 id=655 data-nosnippet>655</a>        <span class="kw">let </span>callback = save_trampoline::&lt;P&gt;;
+<a href=#655 id=655 data-nosnippet>655</a>        <span class="kw">let </span>callback = <a href="#633-654">save_trampoline</a>::&lt;P&gt;;
 <a href=#656 id=656 data-nosnippet>656</a>        <span class="kw">unsafe </span>{
 <a href=#657 id=657 data-nosnippet>657</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_save.html">gtk_file_dialog_save</a>(
 <a href=#658 id=658 data-nosnippet>658</a>                <a class="self" href="#616">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -739,7 +739,7 @@
 <a href=#666 id=666 data-nosnippet>666</a>
 <a href=#667 id=667 data-nosnippet>667</a>    <span class="kw">pub fn </span>save_future(
 <a href=#668 id=668 data-nosnippet>668</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#669 id=669 data-nosnippet>669</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#669 id=669 data-nosnippet>669</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#670 id=670 data-nosnippet>670</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;<span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;Output = <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;&gt; + <span class="lifetime">'static</span>&gt;&gt; {
 <a href=#671 id=671 data-nosnippet>671</a>        <span class="kw">let </span>parent = <a href="#669">parent</a>.<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.map">map</a>(ToOwned::<a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#tymethod.to_owned">to_owned</a>);
 <a href=#672 id=672 data-nosnippet>672</a>        <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.pin">pin</a>(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/gio_future/struct.GioFuture.html">GioFuture</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/gio_future/struct.GioFuture.html#method.new">new</a>(<a class="self" href="#668">self</a>, <span class="kw">move </span>|obj, cancellable, send| {
@@ -775,14 +775,14 @@
 <a href=#702 id=702 data-nosnippet>702</a>        P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/gstring/struct.GString.html">GString</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/gstring/struct.GString.html">GString</a>), glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>,
 <a href=#703 id=703 data-nosnippet>703</a>    &gt;(
 <a href=#704 id=704 data-nosnippet>704</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#705 id=705 data-nosnippet>705</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#705 id=705 data-nosnippet>705</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#706 id=706 data-nosnippet>706</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#707 id=707 data-nosnippet>707</a>        callback: P,
 <a href=#708 id=708 data-nosnippet>708</a>    ) {
 <a href=#709 id=709 data-nosnippet>709</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#710 id=710 data-nosnippet>710</a>        <span class="kw">let </span>is_main_context_owner = <a href="#709">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#711 id=711 data-nosnippet>711</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#710">is_main_context_owner</a>)
-<a href=#712 id=712 data-nosnippet>712</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#709">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#712 id=712 data-nosnippet>712</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#709">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#713 id=713 data-nosnippet>713</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#714 id=714 data-nosnippet>714</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#715 id=715 data-nosnippet>715</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -809,7 +809,7 @@
 <a href=#736 id=736 data-nosnippet>736</a>                    <span class="kw-2">&amp;mut </span><a href="#731">line_ending</a>,
 <a href=#737 id=737 data-nosnippet>737</a>                    <span class="kw-2">&amp;mut </span><a href="#729">error</a>,
 <a href=#738 id=738 data-nosnippet>738</a>                );
-<a href=#739 id=739 data-nosnippet>739</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#729">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#739 id=739 data-nosnippet>739</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#729">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#740 id=740 data-nosnippet>740</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>((
 <a href=#741 id=741 data-nosnippet>741</a>                        <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#732">ret</a>),
 <a href=#742 id=742 data-nosnippet>742</a>                        <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_none.html">from_glib_none</a>(<a href="#730">encoding</a>),
@@ -824,7 +824,7 @@
 <a href=#751 id=751 data-nosnippet>751</a>                <a href="#750">callback</a>(<a href="#739">result</a>);
 <a href=#752 id=752 data-nosnippet>752</a>            }
 <a href=#753 id=753 data-nosnippet>753</a>        }
-<a href=#754 id=754 data-nosnippet>754</a>        <span class="kw">let </span>callback = save_text_file_trampoline::&lt;P&gt;;
+<a href=#754 id=754 data-nosnippet>754</a>        <span class="kw">let </span>callback = <a href="#721-753">save_text_file_trampoline</a>::&lt;P&gt;;
 <a href=#755 id=755 data-nosnippet>755</a>        <span class="kw">unsafe </span>{
 <a href=#756 id=756 data-nosnippet>756</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_save_text_file.html">gtk_file_dialog_save_text_file</a>(
 <a href=#757 id=757 data-nosnippet>757</a>                <a class="self" href="#704">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -840,7 +840,7 @@
 <a href=#767 id=767 data-nosnippet>767</a>    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">"v4_18"</span>)))]
 <a href=#768 id=768 data-nosnippet>768</a>    </span><span class="kw">pub fn </span>save_text_file_future(
 <a href=#769 id=769 data-nosnippet>769</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#770 id=770 data-nosnippet>770</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#770 id=770 data-nosnippet>770</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#771 id=771 data-nosnippet>771</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;
 <a href=#772 id=772 data-nosnippet>772</a>        <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;
 <a href=#773 id=773 data-nosnippet>773</a>            <span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;
@@ -879,14 +879,14 @@
 <a href=#806 id=806 data-nosnippet>806</a>    </span><span class="attr">#[doc(alias = <span class="string">"gtk_file_dialog_select_folder"</span>)]
 <a href=#807 id=807 data-nosnippet>807</a>    </span><span class="kw">pub fn </span>select_folder&lt;P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>&gt;(
 <a href=#808 id=808 data-nosnippet>808</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#809 id=809 data-nosnippet>809</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#809 id=809 data-nosnippet>809</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#810 id=810 data-nosnippet>810</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#811 id=811 data-nosnippet>811</a>        callback: P,
 <a href=#812 id=812 data-nosnippet>812</a>    ) {
 <a href=#813 id=813 data-nosnippet>813</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#814 id=814 data-nosnippet>814</a>        <span class="kw">let </span>is_main_context_owner = <a href="#813">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#815 id=815 data-nosnippet>815</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#814">is_main_context_owner</a>)
-<a href=#816 id=816 data-nosnippet>816</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#813">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#816 id=816 data-nosnippet>816</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#813">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#817 id=817 data-nosnippet>817</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#818 id=818 data-nosnippet>818</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#819 id=819 data-nosnippet>819</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -909,7 +909,7 @@
 <a href=#836 id=836 data-nosnippet>836</a>                    <a href="#829">res</a>,
 <a href=#837 id=837 data-nosnippet>837</a>                    <span class="kw-2">&amp;mut </span><a href="#833">error</a>,
 <a href=#838 id=838 data-nosnippet>838</a>                );
-<a href=#839 id=839 data-nosnippet>839</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#833">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#839 id=839 data-nosnippet>839</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#833">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#840 id=840 data-nosnippet>840</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#834">ret</a>))
 <a href=#841 id=841 data-nosnippet>841</a>                } <span class="kw">else </span>{
 <a href=#842 id=842 data-nosnippet>842</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Err">Err</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#833">error</a>))
@@ -920,7 +920,7 @@
 <a href=#847 id=847 data-nosnippet>847</a>                <a href="#846">callback</a>(<a href="#839">result</a>);
 <a href=#848 id=848 data-nosnippet>848</a>            }
 <a href=#849 id=849 data-nosnippet>849</a>        }
-<a href=#850 id=850 data-nosnippet>850</a>        <span class="kw">let </span>callback = select_folder_trampoline::&lt;P&gt;;
+<a href=#850 id=850 data-nosnippet>850</a>        <span class="kw">let </span>callback = <a href="#825-849">select_folder_trampoline</a>::&lt;P&gt;;
 <a href=#851 id=851 data-nosnippet>851</a>        <span class="kw">unsafe </span>{
 <a href=#852 id=852 data-nosnippet>852</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_select_folder.html">gtk_file_dialog_select_folder</a>(
 <a href=#853 id=853 data-nosnippet>853</a>                <a class="self" href="#808">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -934,7 +934,7 @@
 <a href=#861 id=861 data-nosnippet>861</a>
 <a href=#862 id=862 data-nosnippet>862</a>    <span class="kw">pub fn </span>select_folder_future(
 <a href=#863 id=863 data-nosnippet>863</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#864 id=864 data-nosnippet>864</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#864 id=864 data-nosnippet>864</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#865 id=865 data-nosnippet>865</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;<span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;Output = <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/file/struct.File.html">File</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;&gt; + <span class="lifetime">'static</span>&gt;&gt; {
 <a href=#866 id=866 data-nosnippet>866</a>        <span class="kw">let </span>parent = <a href="#864">parent</a>.<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.map">map</a>(ToOwned::<a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#tymethod.to_owned">to_owned</a>);
 <a href=#867 id=867 data-nosnippet>867</a>        <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.pin">pin</a>(gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/gio_future/struct.GioFuture.html">GioFuture</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/gio_future/struct.GioFuture.html#method.new">new</a>(<a class="self" href="#863">self</a>, <span class="kw">move </span>|obj, cancellable, send| {
@@ -967,14 +967,14 @@
 <a href=#894 id=894 data-nosnippet>894</a>    </span><span class="attr">#[doc(alias = <span class="string">"gtk_file_dialog_select_multiple_folders"</span>)]
 <a href=#895 id=895 data-nosnippet>895</a>    </span><span class="kw">pub fn </span>select_multiple_folders&lt;P: <a href="https://doc.rust-lang.org/nightly/core/ops/function/trait.FnOnce.html">FnOnce</a>(<a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/list_model/struct.ListModel.html">ListModel</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;) + <span class="lifetime">'static</span>&gt;(
 <a href=#896 id=896 data-nosnippet>896</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#897 id=897 data-nosnippet>897</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt;&gt;,
+<a href=#897 id=897 data-nosnippet>897</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt;&gt;,
 <a href=#898 id=898 data-nosnippet>898</a>        cancellable: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/cancellable/struct.Cancellable.html">Cancellable</a>&gt;&gt;,
 <a href=#899 id=899 data-nosnippet>899</a>        callback: P,
 <a href=#900 id=900 data-nosnippet>900</a>    ) {
 <a href=#901 id=901 data-nosnippet>901</a>        <span class="kw">let </span>main_context = glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html">MainContext</a>::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.ref_thread_default">ref_thread_default</a>();
 <a href=#902 id=902 data-nosnippet>902</a>        <span class="kw">let </span>is_main_context_owner = <a href="#901">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.is_owner">is_owner</a>();
 <a href=#903 id=903 data-nosnippet>903</a>        <span class="kw">let </span>has_acquired_main_context = (!<a href="#902">is_main_context_owner</a>)
-<a href=#904 id=904 data-nosnippet>904</a>            .<a href="https://doc.rust-lang.org/nightly/core/foreigntype.bool.html#method.then">then</a>(|| <a href="#901">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
+<a href=#904 id=904 data-nosnippet>904</a>            .<a href="https://doc.rust-lang.org/nightly/core/primitive.bool.html#method.then">then</a>(|| <a href="#901">main_context</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/auto/main_context/struct.MainContext.html#method.acquire">acquire</a>().<a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#method.ok">ok</a>())
 <a href=#905 id=905 data-nosnippet>905</a>            .<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.flatten">flatten</a>();
 <a href=#906 id=906 data-nosnippet>906</a>        <a href="https://doc.rust-lang.org/nightly/core/macro.assert.html">assert!</a>(
 <a href=#907 id=907 data-nosnippet>907</a>            is_main_context_owner || has_acquired_main_context.is_some(),
@@ -997,7 +997,7 @@
 <a href=#924 id=924 data-nosnippet>924</a>                    <a href="#917">res</a>,
 <a href=#925 id=925 data-nosnippet>925</a>                    <span class="kw-2">&amp;mut </span><a href="#921">error</a>,
 <a href=#926 id=926 data-nosnippet>926</a>                );
-<a href=#927 id=927 data-nosnippet>927</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#921">error</a>.<a href="https://doc.rust-lang.org/nightly/core/ptr/foreigntype.mut_ptr.html#method.is_null">is_null</a>() {
+<a href=#927 id=927 data-nosnippet>927</a>                <span class="kw">let </span>result = <span class="kw">if </span><a href="#921">error</a>.<a href="https://doc.rust-lang.org/nightly/core/primitive.pointer.html#method.is_null">is_null</a>() {
 <a href=#928 id=928 data-nosnippet>928</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Ok">Ok</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#922">ret</a>))
 <a href=#929 id=929 data-nosnippet>929</a>                } <span class="kw">else </span>{
 <a href=#930 id=930 data-nosnippet>930</a>                    <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html#variant.Err">Err</a>(<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/fn.from_glib_full.html">from_glib_full</a>(<a href="#921">error</a>))
@@ -1008,7 +1008,7 @@
 <a href=#935 id=935 data-nosnippet>935</a>                <a href="#934">callback</a>(<a href="#927">result</a>);
 <a href=#936 id=936 data-nosnippet>936</a>            }
 <a href=#937 id=937 data-nosnippet>937</a>        }
-<a href=#938 id=938 data-nosnippet>938</a>        <span class="kw">let </span>callback = select_multiple_folders_trampoline::&lt;P&gt;;
+<a href=#938 id=938 data-nosnippet>938</a>        <span class="kw">let </span>callback = <a href="#913-937">select_multiple_folders_trampoline</a>::&lt;P&gt;;
 <a href=#939 id=939 data-nosnippet>939</a>        <span class="kw">unsafe </span>{
 <a href=#940 id=940 data-nosnippet>940</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_select_multiple_folders.html">gtk_file_dialog_select_multiple_folders</a>(
 <a href=#941 id=941 data-nosnippet>941</a>                <a class="self" href="#896">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>,
@@ -1022,7 +1022,7 @@
 <a href=#949 id=949 data-nosnippet>949</a>
 <a href=#950 id=950 data-nosnippet>950</a>    <span class="kw">pub fn </span>select_multiple_folders_future(
 <a href=#951 id=951 data-nosnippet>951</a>        <span class="kw-2">&amp;</span><span class="self">self</span>,
-<a href=#952 id=952 data-nosnippet>952</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#21-781">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
+<a href=#952 id=952 data-nosnippet>952</a>        parent: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span>(<span class="kw">impl </span><a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.IsA.html">IsA</a>&lt;<a href="window.rs.html#26-726">Window</a>&gt; + <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html">Clone</a> + <span class="lifetime">'static</span>)&gt;,
 <a href=#953 id=953 data-nosnippet>953</a>    ) -&gt; <a href="https://doc.rust-lang.org/nightly/core/pin/struct.Pin.html">Pin</a>&lt;<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>&lt;<span class="kw">dyn </span><a href="https://doc.rust-lang.org/nightly/core/future/future/trait.Future.html">std::future::Future</a>&lt;Output = <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html">Result</a>&lt;gio::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/gio/auto/list_model/struct.ListModel.html">ListModel</a>, glib::<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/error/struct.Error.html">Error</a>&gt;&gt; + <span class="lifetime">'static</span>&gt;&gt;
 <a href=#954 id=954 data-nosnippet>954</a>    {
 <a href=#955 id=955 data-nosnippet>955</a>        <span class="kw">let </span>parent = <a href="#952">parent</a>.<a href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#method.map">map</a>(ToOwned::<a href="https://doc.rust-lang.org/nightly/alloc/borrow/trait.ToOwned.html#tymethod.to_owned">to_owned</a>);
@@ -1065,7 +1065,7 @@
 <a href=#992 id=992 data-nosnippet>992</a>    /// the file filter
 <a href=#993 id=993 data-nosnippet>993</a>    </span><span class="attr">#[doc(alias = <span class="string">"gtk_file_dialog_set_default_filter"</span>)]
 <a href=#994 id=994 data-nosnippet>994</a>    #[doc(alias = <span class="string">"default-filter"</span>)]
-<a href=#995 id=995 data-nosnippet>995</a>    </span><span class="kw">pub fn </span>set_default_filter(<span class="kw-2">&amp;</span><span class="self">self</span>, filter: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><a href="file_filter.rs.html#14-100">FileFilter</a>&gt;) {
+<a href=#995 id=995 data-nosnippet>995</a>    </span><span class="kw">pub fn </span>set_default_filter(<span class="kw-2">&amp;</span><span class="self">self</span>, filter: <a class="prelude-ty" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html">Option</a>&lt;<span class="kw-2">&amp;</span><a href="file_filter.rs.html#14-57">FileFilter</a>&gt;) {
 <a href=#996 id=996 data-nosnippet>996</a>        <span class="kw">unsafe </span>{
 <a href=#997 id=997 data-nosnippet>997</a>            ffi::<a href="../../../gtk4_sys/fn.gtk_file_dialog_set_default_filter.html">gtk_file_dialog_set_default_filter</a>(<a class="self" href="#995">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>, <a href="#995">filter</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/translate/trait.ToGlibPtr.html#tymethod.to_glib_none">to_glib_none</a>().<span class="number">0</span>);
 <a href=#998 id=998 data-nosnippet>998</a>        }
@@ -1181,8 +1181,8 @@
 <a href=#1108 id=1108 data-nosnippet>1108</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1109 id=1109 data-nosnippet>1109</a>                <a class="self" href="#1095">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1110 id=1110 data-nosnippet>1110</a>                <span class="string">c"notify::accept-label"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1111 id=1111 data-nosnippet>1111</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1112 id=1112 data-nosnippet>1112</a>                    notify_accept_label_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1111 id=1111 data-nosnippet>1111</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1112 id=1112 data-nosnippet>1112</a>                    <a href="#1096-1105">notify_accept_label_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1113 id=1113 data-nosnippet>1113</a>                )),
 <a href=#1114 id=1114 data-nosnippet>1114</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1107">f</a>),
 <a href=#1115 id=1115 data-nosnippet>1115</a>            )
@@ -1208,8 +1208,8 @@
 <a href=#1135 id=1135 data-nosnippet>1135</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1136 id=1136 data-nosnippet>1136</a>                <a class="self" href="#1122">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1137 id=1137 data-nosnippet>1137</a>                <span class="string">c"notify::default-filter"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1138 id=1138 data-nosnippet>1138</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1139 id=1139 data-nosnippet>1139</a>                    notify_default_filter_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1138 id=1138 data-nosnippet>1138</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1139 id=1139 data-nosnippet>1139</a>                    <a href="#1123-1132">notify_default_filter_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1140 id=1140 data-nosnippet>1140</a>                )),
 <a href=#1141 id=1141 data-nosnippet>1141</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1134">f</a>),
 <a href=#1142 id=1142 data-nosnippet>1142</a>            )
@@ -1235,8 +1235,8 @@
 <a href=#1162 id=1162 data-nosnippet>1162</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1163 id=1163 data-nosnippet>1163</a>                <a class="self" href="#1149">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1164 id=1164 data-nosnippet>1164</a>                <span class="string">c"notify::filters"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1165 id=1165 data-nosnippet>1165</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1166 id=1166 data-nosnippet>1166</a>                    notify_filters_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1165 id=1165 data-nosnippet>1165</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1166 id=1166 data-nosnippet>1166</a>                    <a href="#1150-1159">notify_filters_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1167 id=1167 data-nosnippet>1167</a>                )),
 <a href=#1168 id=1168 data-nosnippet>1168</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1161">f</a>),
 <a href=#1169 id=1169 data-nosnippet>1169</a>            )
@@ -1262,8 +1262,8 @@
 <a href=#1189 id=1189 data-nosnippet>1189</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1190 id=1190 data-nosnippet>1190</a>                <a class="self" href="#1176">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1191 id=1191 data-nosnippet>1191</a>                <span class="string">c"notify::initial-file"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1192 id=1192 data-nosnippet>1192</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1193 id=1193 data-nosnippet>1193</a>                    notify_initial_file_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1192 id=1192 data-nosnippet>1192</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1193 id=1193 data-nosnippet>1193</a>                    <a href="#1177-1186">notify_initial_file_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1194 id=1194 data-nosnippet>1194</a>                )),
 <a href=#1195 id=1195 data-nosnippet>1195</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1188">f</a>),
 <a href=#1196 id=1196 data-nosnippet>1196</a>            )
@@ -1289,8 +1289,8 @@
 <a href=#1216 id=1216 data-nosnippet>1216</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1217 id=1217 data-nosnippet>1217</a>                <a class="self" href="#1203">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1218 id=1218 data-nosnippet>1218</a>                <span class="string">c"notify::initial-folder"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1219 id=1219 data-nosnippet>1219</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1220 id=1220 data-nosnippet>1220</a>                    notify_initial_folder_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1219 id=1219 data-nosnippet>1219</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1220 id=1220 data-nosnippet>1220</a>                    <a href="#1204-1213">notify_initial_folder_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1221 id=1221 data-nosnippet>1221</a>                )),
 <a href=#1222 id=1222 data-nosnippet>1222</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1215">f</a>),
 <a href=#1223 id=1223 data-nosnippet>1223</a>            )
@@ -1316,8 +1316,8 @@
 <a href=#1243 id=1243 data-nosnippet>1243</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1244 id=1244 data-nosnippet>1244</a>                <a class="self" href="#1230">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1245 id=1245 data-nosnippet>1245</a>                <span class="string">c"notify::initial-name"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1246 id=1246 data-nosnippet>1246</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1247 id=1247 data-nosnippet>1247</a>                    notify_initial_name_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1246 id=1246 data-nosnippet>1246</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1247 id=1247 data-nosnippet>1247</a>                    <a href="#1231-1240">notify_initial_name_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1248 id=1248 data-nosnippet>1248</a>                )),
 <a href=#1249 id=1249 data-nosnippet>1249</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1242">f</a>),
 <a href=#1250 id=1250 data-nosnippet>1250</a>            )
@@ -1343,8 +1343,8 @@
 <a href=#1270 id=1270 data-nosnippet>1270</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1271 id=1271 data-nosnippet>1271</a>                <a class="self" href="#1257">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1272 id=1272 data-nosnippet>1272</a>                <span class="string">c"notify::modal"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1273 id=1273 data-nosnippet>1273</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1274 id=1274 data-nosnippet>1274</a>                    notify_modal_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1273 id=1273 data-nosnippet>1273</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1274 id=1274 data-nosnippet>1274</a>                    <a href="#1258-1267">notify_modal_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1275 id=1275 data-nosnippet>1275</a>                )),
 <a href=#1276 id=1276 data-nosnippet>1276</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1269">f</a>),
 <a href=#1277 id=1277 data-nosnippet>1277</a>            )
@@ -1370,8 +1370,8 @@
 <a href=#1297 id=1297 data-nosnippet>1297</a>            <a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/signal/fn.connect_raw.html">connect_raw</a>(
 <a href=#1298 id=1298 data-nosnippet>1298</a>                <a class="self" href="#1284">self</a>.<a href="https://gtk-rs.org/gtk-rs-core/git/docs/glib/object/trait.ObjectType.html#tymethod.as_ptr">as_ptr</a>() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>,
 <a href=#1299 id=1299 data-nosnippet>1299</a>                <span class="string">c"notify::title"</span>.<a href="https://doc.rust-lang.org/nightly/core/ffi/c_str/struct.CStr.html#method.as_ptr">as_ptr</a>(),
-<a href=#1300 id=1300 data-nosnippet>1300</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::transmute::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
-<a href=#1301 id=1301 data-nosnippet>1301</a>                    notify_title_trampoline::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
+<a href=#1300 id=1300 data-nosnippet>1300</a>                <a class="prelude-val" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html#variant.Some">Some</a>(std::mem::<a href="https://doc.rust-lang.org/nightly/core/intrinsics/fn.transmute.html">transmute</a>::&lt;<span class="kw-2">*const </span>(), <span class="kw">unsafe extern </span><span class="string">"C" </span><span class="kw">fn</span>()&gt;(
+<a href=#1301 id=1301 data-nosnippet>1301</a>                    <a href="#1285-1294">notify_title_trampoline</a>::&lt;F&gt; <span class="kw">as </span><span class="kw-2">*const </span>(),
 <a href=#1302 id=1302 data-nosnippet>1302</a>                )),
 <a href=#1303 id=1303 data-nosnippet>1303</a>                <a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html">Box_</a>::<a href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html#method.into_raw">into_raw</a>(<a href="#1296">f</a>),
 <a href=#1304 id=1304 data-nosnippet>1304</a>            )
@@ -1424,7 +1424,7 @@
 <a href=#1351 id=1351 data-nosnippet>1351</a>    /// part of the list. If it is not, the dialog may choose to not make it available.
 <a href=#1352 id=1352 data-nosnippet>1352</a>    </span><span class="attr">#[cfg(feature = <span class="string">"v4_10"</span>)]
 <a href=#1353 id=1353 data-nosnippet>1353</a>    #[cfg_attr(docsrs, doc(cfg(feature = <span class="string">"v4_10"</span>)))]
-<a href=#1354 id=1354 data-nosnippet>1354</a>    </span><span class="kw">pub fn </span>default_filter(<span class="self">self</span>, default_filter: <span class="kw-2">&amp;</span><a href="file_filter.rs.html#14-100">FileFilter</a>) -&gt; <span class="self">Self </span>{
+<a href=#1354 id=1354 data-nosnippet>1354</a>    </span><span class="kw">pub fn </span>default_filter(<span class="self">self</span>, default_filter: <span class="kw-2">&amp;</span><a href="file_filter.rs.html#14-57">FileFilter</a>) -&gt; <span class="self">Self </span>{
 <a href=#1355 id=1355 data-nosnippet>1355</a>        <span class="self">Self </span>{
 <a href=#1356 id=1356 data-nosnippet>1356</a>            builder: <a class="self" href="#1354">self</a>
 <a href=#1357 id=1357 data-nosnippet>1357</a>                .builder
